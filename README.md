@@ -5,6 +5,7 @@ The idea is that you track your $HOME files in a bare git repo.
 ```
 $ git init --bare $HOME/github.com/jreisinger/githome
 $ alias githome='git --work-tree=$HOME --git-dir=$HOME/github.com/jreisinger/githome'
+$ githome remote add origin git@github.com:jreisinger/githome.git
 ```
 
 You ignore all files in your $HOME
