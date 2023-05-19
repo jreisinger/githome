@@ -11,10 +11,9 @@ $ githome remote add origin git@github.com:jreisinger/githome.git
 You ignore all files in your $HOME
 
 ```
-$ cat << EOF > $HOME/.gitignore
+$ cat $HOME/.gitignore
 *
 !.gitignore
-EOF
 ```
 
 except for those you want to track
