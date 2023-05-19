@@ -95,6 +95,8 @@ if [[ -r ~/.work-aliases ]]; then
     source ~/.work-aliases
 fi
 
+alias githome='git --work-tree=$HOME --git-dir=$HOME/github.com/jreisinger/githome'
+
 alias ls='ls --color=auto --group-directories-first'
 
 alias grep='grep --color=auto'
