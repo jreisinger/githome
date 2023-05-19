@@ -1,0 +1,47 @@
+# So I can have two users. ~/.gitconfig-* looks like:
+#[user]
+#    login = jsmith
+#    email = john.smith@gmail.com
+#    signingkey = A12EAD1BAA8578E1
+[include]
+    path = ~/.gitconfig-personal
+[includeIf "gitdir:~/gh/empatica/"]
+    path = ~/.gitconfig-empatica
+
+[commit]
+    gpgSign = true
+[core]
+    editor = vim
+    filemode = false
+
+    # By default, git will print non-ASCII file names in quoted octal
+    # notation, i.e.  "\nnn\nnn...". This disables this behaviour.
+    quotepath = off
+
+    # If delta (github.com/dandavison/delta) is installed use it for pager.
+    # Otherwise use less.
+    pager = "p=$(which delta); ${p:-less}"
+
+    hooksPath = ~/.git-global-hooks
+[delta]
+    navigate = true # use n and N to move between diff sections
+    light = true # set to true if you're in a terminal w/ a light background color
+    file-style = normal # filename color
+[merge]
+    tool = vimdiff
+[push]
+    default = matching
+[pull]
+    rebase = false
+[init]
+    defaultBranch = main
+[alias]
+    d = diff
+    ds = -c delta.side-by-side=true diff
+    diffs = ds
+    s = status
+    l = log --pretty=format:'%C(auto)%h %Cgreen%ad %Cblue%an %Creset%s %C(auto)%D' --date=short --name-status
+[color "decorate"]
+    HEAD = cyan
+    branch = green
+    tag = blue bold
