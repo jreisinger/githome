@@ -1,0 +1,59 @@
+add_newline = false
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$kubernetes\
+$aws\
+$env_var\
+$sudo\
+$line_break\
+$jobs\
+$status\
+$container\
+$shell\
+$character"""
+
+[username]
+style_user = 'yellow'
+format = '[$user]($style)@'
+
+[hostname]
+style = 'green'
+format = '[$ssh_symbol$hostname]($style) '
+
+[directory]
+style = "bold blue"
+truncate_to_repo = true
+use_logical_path = false
+[directory.substitutions]
+"/private/play" = "~/play"
+
+[git_branch]
+format = "[$branch(:$remote_branch)]($style) "
+truncation_length = 25
+
+[kubernetes]
+disabled = false
+style = "fg:26"
+format = '[$context( \($namespace\))]($style) '
+
+[character]
+success_symbol = '[\$](green)'
+error_symbol = '[\$](red)'
+
+[jobs]
+symbol = "& "
+number_threshold = 1
+
+[aws]
+style = "bold blue"
+format = '[$symbol($profile )(\[$duration\] )]($style)'
+
+[line_break]
+disabled = true
