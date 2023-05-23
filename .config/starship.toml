@@ -1,23 +1,32 @@
+# Inserts a blank line between shell prompts
 add_newline = false
+
 format = """
+$time\
 $username\
 $hostname\
+$kubernetes\
+$aws\
+$env_var\
+$sudo\
+$status\
+$container\
+$shell\
+$line_break\
 $directory\
 $git_branch\
 $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-$kubernetes\
-$aws\
-$env_var\
-$sudo\
-$line_break\
 $jobs\
-$status\
-$container\
-$shell\
 $character"""
+
+[time]
+disabled = false
+style = "bright-blue"
+format = "[($time )]($style)"
+time_format = '%F %R'
 
 [username]
 style_user = 'yellow'
