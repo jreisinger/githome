@@ -56,4 +56,4 @@ style = "bold blue"
 format = '[$symbol($profile )(\[$duration\] )]($style)'
 
 [line_break]
-disabled = true
+disabled = false
