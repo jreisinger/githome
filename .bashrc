@@ -178,7 +178,7 @@ export MAIL="/var/mail/$USER"
 # fi
 
 # print one of my favorite quotes when bash is interactive and it's morning
-if  [[ $- == *i* ]] && [[ "$(date +%k)" -lt 9 ]]; then
+if  [[ $- == *i* ]] && [[ "$(TZ=CET date +%k)" -lt 9 ]]; then
 	myquote
 fi
 
