@@ -173,7 +173,12 @@ export LC_ALL=en_US.UTF-8
 export MAIL="/var/mail/$USER"
 
 # print one of my favorite quotes when bash is interactive and only 1 out of 10 times
-if [[ $- == *i* ]] && [[ "$RANDOM" -lt 3277 ]]; then
+# if [[ $- == *i* ]] && [[ "$RANDOM" -lt 3277 ]]; then
+# 	myquote
+# fi
+
+# print one of my favorite quotes when bash is interactive and it's morning
+if  [[ $- == *i* ]] && [[ "$(date +%k)" -lt 9 ]]; then
 	myquote
 fi
 
