@@ -2,14 +2,13 @@
 add_newline = false
 
 format = """
-$time\
+$status\
 $username\
 $hostname\
 $kubernetes\
 $aws\
 $env_var\
 $sudo\
-$status\
 $container\
 $shell\
 $line_break\
@@ -22,11 +21,12 @@ $git_status\
 $jobs\
 $character"""
 
-[time]
+[status]
 disabled = false
-style = "bright-blue"
-format = "[($time )]($style)"
-time_format = '%F %R'
+success_symbol = 'OK'
+format = '[\[$symbol $status\]]($style) '
+map_symbol = true
+style = ''
 
 [username]
 style_user = 'yellow'
@@ -35,6 +35,18 @@ format = '[$user]($style)@'
 [hostname]
 style = 'green'
 format = '[$ssh_symbol$hostname]($style) '
+
+[kubernetes]
+disabled = false
+style = "fg:26"
+format = '[$symbol$context( \($namespace\))]($style) '
+
+[aws]
+style = "bold blue"
+format = '[$symbol($profile )(\[$duration\] )]($style)'
+
+[line_break]
+disabled = false
 
 [directory]
 style = "bold blue"
@@ -47,22 +59,10 @@ use_logical_path = false
 format = "[$branch(:$remote_branch)]($style) "
 truncation_length = 25
 
-[kubernetes]
-disabled = false
-style = "fg:26"
-format = '[$context( \($namespace\))]($style) '
-
-[character]
-success_symbol = '[\$](green)'
-error_symbol = '[\$](red)'
-
 [jobs]
 symbol = "& "
 number_threshold = 1
 
-[aws]
-style = "bold blue"
-format = '[$symbol($profile )(\[$duration\] )]($style)'
-
-[line_break]
-disabled = false
+[character]
+success_symbol = '\$'
+error_symbol = '\$'
