@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+#
+# The Pomodoro Technique is a time management method based on 25-minute
+# stretches of focused work broken by five-minute breaks. Longer breaks,
+# typically 15 to 30 minutes, are taken after four consecutive work intervals.
+# Each work interval is called a pomodoro.
+
+POMODORO=~/.pomodoro; [[ -d $POMODORO ]] || mkdir $POMODORO || exit 1
+TODAY=$(date +%F)
+INTERVAL=1500 # seconds
+
+bell() {
+    local cnt
+    cnt=$1
+    for (( i = 0; i < "$cnt"; i++ )); do
+        printf '\a'
+        sleep 0.3 
+    done
+}
+
+count() {
+    local cnt
+    cnt=$(wc -l "$POMODORO/$TODAY" | cut -d ' ' -f 1)
+    for (( i = 0; i < "$cnt"; i++ )); do
+        [[ $i -ne 0 ]] && [[ $((i%4)) -eq 0 ]] && printf "|"
+        printf "🍅"
+    done
+}
+
+case $1 in
+status)
+    count
+    if [[ -e $POMODORO/running ]]; then
+        START=$(date -r $POMODORO/running +%s)
+        NOW=$(date +%s)
+        REMAINING=$((INTERVAL-(NOW-START)))
+        printf " %s\n" "$(date -d @${REMAINING} +%M:%S)"
+    else
+        printf "\n"
+    fi
+    ;;
+start)
+    if [[ -e $POMODORO/running ]]; then
+        START=$(date -r $POMODORO/running +%H:%M)
+        printf "already running pomodoro from %s\n" "$START"
+        exit 1
+    else
+        sleep $INTERVAL                     && \
+        rm $POMODORO/running                && \
+        date +%H:%M >> $POMODORO/"$TODAY"   && \
+        bell 2                              &
+        echo $! > $POMODORO/running # save PID of last backgrounded command
+    fi
+    ;;
+stop)
+    if [[ -e $POMODORO/running ]]; then
+        START=$(date -r $POMODORO/running +%s)
+        NOW=$(date +%s)
+        ELAPSED=$((NOW-START))
+        printf "stopped after %s\n" "$(date -d @${ELAPSED} +%M:%S)"
+
+        PID="$(cat $POMODORO/running)"
+        # shellcheck disable=SC2009
+        PGID=$(ps -o pgid= "$PID" | grep -o '[0-9]*')
+        kill -- -"$PGID" # kill the whole process group
+        rm $POMODORO/running
+    else
+        printf "no pomodoro running\n"
+        exit 1
+    fi 
+    ;;
+*)
+    printf "use one of status, start or stop\n"
+esac
