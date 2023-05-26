@@ -24,7 +24,7 @@ $character"""
 [status]
 disabled = false
 success_symbol = 'OK'
-format = '[\[$symbol $status\]]($style) '
+format = '[↳\[$symbol $status\]]($style) '
 map_symbol = true
 style = ''
 
