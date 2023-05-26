@@ -8,12 +8,13 @@ TODAY=$(date +%F); [[ -f $POMODORO/$TODAY ]] || touch $POMODORO/"$TODAY"
 usage() {
     local msg
     read -r -d '' msg <<'EOF'
-The pomodoro technique is a time management method based on 25-minute sessions
-of focused work broken by five-minute breaks. Longer breaks (15-30min) are taken
-after four consecutive sessions. Each work session is called a pomodoro.
+Pomodoro is a time management technique to fight internal and external
+interruptions. It's based on 25-minute sessions of focused work broken by
+five-minute breaks. Longer breaks are taken after four consecutive sessions.
+Each work session is called a pomodoro.
 
   start     start pomodoro session (the bell will ring twice when done)
-  stop      stop pomodoro session (don't you dare :-)
+  stop      interrupt pomodoro session (don't you dare :-)
   status    how are you doing today ...
 EOF
     printf "%s\n" "$msg"
