@@ -36,6 +36,8 @@ count() {
         [[ $i -ne 0 ]] && [[ $((i%4)) -eq 0 ]] && printf " "
         printf "🍅"
     done
+    # to prefix with space also the remaining time in status if we made four pomodori
+    [[ $cnt -ne 0 ]] && [[ $((cnt%4)) -eq 0 ]] && printf " "
 }
 
 case $1 in
