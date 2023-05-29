@@ -13,7 +13,7 @@ interruptions. It's based on 25-minute sessions of focused work broken by
 five-minute breaks. Longer breaks are taken after four consecutive sessions.
 Each work session is called a pomodoro.
 
-  start     start pomodoro session (the bell will ring twice when done)
+  start     start pomodoro session (bell will ring twice when done)
   stop      interrupt pomodoro session (don't you dare :-)
   status    how are you doing today ...
 EOF
