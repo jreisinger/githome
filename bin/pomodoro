@@ -40,22 +40,34 @@ count() {
     [[ $cnt -ne 0 ]] && [[ $((cnt%4)) -eq 0 ]] && printf " "
 }
 
+elapsed() {
+    local start now elapsed
+    start=$(date -r $POMODORO/running +%s)
+    now=$(date +%s)
+    elapsed=$((now-start))
+    date -d @${elapsed} +%M:%S
+}
+
+remaining() {
+    local start now remaining
+    start=$(date -r $POMODORO/running +%s)
+    now=$(date +%s)
+    remaining=$((INTERVAL-(now-start)))
+    date -d @${remaining} +%M:%S
+}
+
 case $1 in
 status)
     count
     if [[ -e $POMODORO/running ]]; then
-        START=$(date -r $POMODORO/running +%s)
-        NOW=$(date +%s)
-        REMAINING=$((INTERVAL-(NOW-START)))
-        printf "(%s)\n" "$(date -d @${REMAINING} +%M:%S)"
+        printf "(%s)\n" "$(remaining)"
     else
         printf "\n"
     fi
     ;;
 start)
     if [[ -e $POMODORO/running ]]; then
-        START=$(date -r $POMODORO/running +%H:%M)
-        printf "already running pomodoro from %s\n" "$START"
+        printf "already running for %s\n" "$(elapsed)"
         exit 1
     else
         sleep $INTERVAL                     && \
@@ -67,18 +79,14 @@ start)
     ;;
 stop)
     if [[ -e $POMODORO/running ]]; then
-        START=$(date -r $POMODORO/running +%s)
-        NOW=$(date +%s)
-        ELAPSED=$((NOW-START))
-        printf "stopped pomodoro after %s\n" "$(date -d @${ELAPSED} +%M:%S)"
-
+        printf "stopped after %s\n" "$(elapsed)"
         PID="$(cat $POMODORO/running)"
         # shellcheck disable=SC2009
         PGID=$(ps -o pgid= "$PID" | grep -o '[0-9]*')
         kill -- -"$PGID" # kill the whole process group
         rm $POMODORO/running
     else
-        printf "no pomodoro running\n"
+        printf "not running\n"
         exit 1
     fi 
     ;;
