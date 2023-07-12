@@ -134,6 +134,7 @@ function c {
         ~/OneDrive \
         ~/Google\ Drive/My\ Drive \
         ~/Google\ Drive/Shared\ drives \
+        -name .git -prune -o -print \
         | fzf --scheme=path)
     if [[ -z $proj ]]; then
         return
