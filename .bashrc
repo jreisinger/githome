@@ -142,7 +142,7 @@ function c {
         cd "$proj" || return
     else
         cd "$(dirname "$proj")" || return
-        code -a "$(basename "$proj")"
+        vim "$(basename "$proj")"
     fi
 }
 
@@ -161,6 +161,23 @@ function h {
      cmd=$(history | $tac | perl -wpe 's/^\s*\d+\s+//' | awk '!seen[$0]++' | fzf --scheme=history)
     # add $cmd to history
     history -s "$cmd"
+}
+
+# Search and display my docs (notes and blog posts).
+function docs {
+    local doc
+    doc=$(find                          \
+        ~/github.com/jreisinger/docs    \
+        -name .git -prune -o -print     \
+        | fzf --scheme=path)
+    if [[ -z $doc ]]; then
+        return
+    elif [[ -d $doc ]]; then
+        cd "$doc" || return
+    else
+        cd "$(dirname "$doc")" || return
+    fi
+    vim "$doc"
 }
 
 #########
