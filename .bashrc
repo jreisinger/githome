@@ -168,6 +168,7 @@ function docs {
     local doc
     doc=$(find                          \
         ~/github.com/jreisinger/docs    \
+        ~/OneDrive/docs                 \
         -name .git -prune -o -print     \
         | fzf --scheme=path)
     if [[ -z $doc ]]; then
