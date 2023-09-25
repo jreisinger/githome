@@ -37,7 +37,8 @@ export SHELL_SESSION_HISTORY=0
 export HISTSIZE=999999
 export HISTFILESIZE=999999
 
-# don't store lines starting with space and duplicate lines in the history
+# don't store lines starting with space and
+# duplicate lines (successive and anywhere)
 export HISTCONTROL=ignorespace:ignoredups:erasedups
 
 ########
@@ -125,27 +126,6 @@ fi
 # Productivity tools #
 ######################
 
-# cd to one of my commonly used directories.
-function c {
-    local proj
-    proj=$(find -L \
-        ~/github.com \
-        ~/play \
-        ~/OneDrive \
-        ~/Google\ Drive/My\ Drive \
-        ~/Google\ Drive/Shared\ drives \
-        -name .git -prune -o -print \
-        | fzf --scheme=path)
-    if [[ -z $proj ]]; then
-        return
-    elif [[ -d $proj ]]; then
-        cd "$proj" || return
-    else
-        cd "$(dirname "$proj")" || return
-        vim "$(basename "$proj")"
-    fi
-}
-
 # Search history. Don't run command from h just store it into history.
 function h {
     local tac
@@ -163,22 +143,24 @@ function h {
     history -s "$cmd"
 }
 
-# Search and display my docs (notes and blog posts).
-function docs {
-    local doc
-    doc=$(find                          \
+# Search names of my documents.
+function docs-find {
+    local pattern=$1
+    find                                \
         ~/github.com/jreisinger/docs    \
         ~/OneDrive/docs                 \
-        -name .git -prune -o -print     \
-        | fzf --scheme=path)
-    if [[ -z $doc ]]; then
-        return
-    elif [[ -d $doc ]]; then
-        cd "$doc" || return
-    else
-        cd "$(dirname "$doc")" || return
-    fi
-    vim "$doc"
+        -iname "*$pattern*"             \
+        | rg -i "$pattern"
+}
+
+# Search contents of my documents.
+function docs-grep {
+    local pattern=$1
+    find                                \
+        ~/github.com/jreisinger/docs    \
+        ~/OneDrive/docs                 \
+        -type f -print0                 \
+        | xargs -0 rg -i "$pattern"
 }
 
 #########
