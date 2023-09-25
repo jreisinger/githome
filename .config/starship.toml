@@ -49,11 +49,13 @@ format = '[$symbol($profile )(\[$duration\] )]($style)'
 disabled = false
 
 [directory]
-style = "bold blue"
-truncate_to_repo = true
-use_logical_path = true
-#[directory.substitutions]
-#"/private/play" = "~/play"
+style               = "bold blue"
+truncation_length   = 0
+truncate_to_repo    = false
+use_logical_path    = false
+[directory.substitutions]
+"/private/play"     = "~/play"
+"/private/tmp"      = "/tmp"
 
 [git_branch]
 format = "[$branch(:$remote_branch)]($style) "
