@@ -149,6 +149,7 @@ function docs-find {
     find                                \
         ~/github.com/jreisinger/docs    \
         ~/OneDrive/docs                 \
+        -not -path '*.git*'             \
         -iname "*$pattern*"             \
         | rg -i "$pattern"
 }
@@ -159,6 +160,7 @@ function docs-grep {
     find                                \
         ~/github.com/jreisinger/docs    \
         ~/OneDrive/docs                 \
+        -not -path '*.git*'             \
         -type f -print0                 \
         | xargs -0 rg -i "$pattern"
 }
@@ -180,7 +182,8 @@ export MAIL="/var/mail/$USER"
 
 # print one of my favorite quotes when bash is interactive and it's morning
 if  [[ $- == *i* ]] && [[ "$(TZ=CET date +%k)" -lt 10 ]]; then
-	myquote
+    myquote
+    goal
 fi
 
 # Fancy PS1 prompt.
