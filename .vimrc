@@ -85,4 +85,4 @@ let &t_EI = "\e[2 q"
 
 " vim-go plugin
 let g:go_auto_type_info = 1 " show info on identifiers (:GoInfo)
-let g:go_auto_sameids   = 1 " automatically highlight identifiers (:GoSameIds[Clear])
+let g:go_auto_sameids   = 0 " automatically highlight identifiers (:GoSameIds[Clear])
