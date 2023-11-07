@@ -183,7 +183,7 @@ export MAIL="/var/mail/$USER"
 # print one of my favorite quotes when bash is interactive and it's morning
 if  [[ $- == *i* ]] && [[ "$(TZ=CET date +%k)" -lt 10 ]]; then
     myquote
-    goal
+    #goal
 fi
 
 # Fancy PS1 prompt.
