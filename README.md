@@ -19,7 +19,7 @@ $ cat $HOME/.gitignore
 except for those you want to track
 
 ```
-$ githome add .gitignore # you need -f for all other files
+$ githome add .gitignore # you'll need -f for all other files
 $ githome commit -m "genesis"
 $ githome ls-tree main -r --name-only
 .gitignore
