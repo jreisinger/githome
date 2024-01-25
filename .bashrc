@@ -148,7 +148,7 @@ function docs-find {
     local pattern=$1
     find                                \
         ~/github.com/jreisinger/docs    \
-        ~/OneDrive/docs                 \
+        ~/docs                          \
         -not -path '*.git*'             \
         -iname "*$pattern*"             \
         | rg -i "$pattern"
@@ -159,7 +159,7 @@ function docs-grep {
     local pattern=$1
     find                                \
         ~/github.com/jreisinger/docs    \
-        ~/OneDrive/docs                 \
+        ~/docs                          \
         -not -path '*.git*'             \
         -type f -print0                 \
         | xargs -0 rg -i "$pattern"

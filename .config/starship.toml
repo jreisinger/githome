@@ -54,8 +54,8 @@ truncation_length   = 0
 truncate_to_repo    = false
 use_logical_path    = false
 [directory.substitutions]
-"/private/play"     = "~/play"
-"/private/tmp"      = "/tmp"
+#"/private/play"     = "~/play"
+#"/private/tmp"      = "/tmp"
 
 [git_branch]
 format = "[$branch(:$remote_branch)]($style) "
