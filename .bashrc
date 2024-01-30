@@ -116,6 +116,8 @@ if which kubectl > /dev/null 2>&1; then
     source <(kubectl completion bash)
     alias k=kubectl
     complete -F __start_kubectl k # enable completion for k alias
+
+    alias bb='kubectl run busybox-$(whoami) --image=busybox --rm -it --restart=Never --command -- '
 fi
 
 if which kubectx > /dev/null 2>&1; then
