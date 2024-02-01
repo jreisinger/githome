@@ -45,24 +45,22 @@ export HISTCONTROL=ignorespace:ignoredups:erasedups
 # PATH #
 ########
 
-# Use GNU instead of BSD tools (Mac; brew install coreutils). Must be first.
-if [[ -d /opt/homebrew/opt/coreutils/libexec/gnubin ]]; then
-        PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-fi
-
-function _addToPath {
+function _prependToPATH {
     local dir=$1
     if [[ -d "$dir" ]]; then
-        PATH="$PATH:$dir"
+        PATH="$dir:$PATH"
     fi
 }
 
-_addToPath "$HOME/bin"
-_addToPath "$HOME/go/bin"
-_addToPath "$HOME/Google Drive/My Drive/bin" # emp
-_addToPath "$HOME/.krew/bin"
-_addToPath "$HOME/Library/Python/3.11/bin" # pip3 installed (Mac)
-_addToPath "$HOME/.rd/bin" # rancher desktop
+# LIFO order.
+_prependToPATH "$HOME/bin"
+_prependToPATH "$HOME/go/bin"
+_prependToPATH "$HOME/Google Drive/My Drive/bin" # emp
+_prependToPATH "$HOME/.krew/bin"
+_prependToPATH "$HOME/Library/Python/3.11/bin" # pip3 installed (Mac)
+_prependToPATH "$HOME/.rd/bin" # rancher desktop
+# Use GNU instead of BSD tools (Mac; brew install coreutils). Must be first.
+_prependToPATH "/opt/homebrew/opt/coreutils/libexec/gnubin"
 
 # dedup PATH
 # PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
