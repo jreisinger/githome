@@ -53,6 +53,7 @@ function _prependToPATH {
 }
 
 # LIFO order.
+_prependToPATH "/usr/local/go/bin"
 _prependToPATH "$HOME/bin"
 _prependToPATH "$HOME/go/bin"
 _prependToPATH "$HOME/Google Drive/My Drive/bin" # emp
