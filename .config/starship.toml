@@ -2,31 +2,24 @@
 add_newline = false
 
 format = """
-$status\
 $username\
 $hostname\
-$kubernetes\
 $aws\
+$gcloud\
+$kubernetes\
 $env_var\
 $sudo\
 $container\
 $shell\
-$line_break\
 $directory\
 $git_branch\
 $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
+$line_break\
 $jobs\
 $character"""
-
-[status]
-disabled = false
-success_symbol = 'OK'
-format = '[↳\[$symbol $status\]]($style) '
-map_symbol = true
-style = ''
 
 [username]
 style_user = 'yellow'
@@ -36,20 +29,26 @@ format = '[$user]($style)@'
 style = 'green'
 format = '[$ssh_symbol$hostname]($style) '
 
+[aws]
+disabled = true
+symbol = '☁️ '
+format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+
+[gcloud]
+disabled = true
+symbol = '☁️ '
+format = '[$symbol(\($region\))]($style) '
+
 [kubernetes]
 disabled = false
-style = "fg:26"
+style = "fg:25"
+symbol = '☸ '
 format = '[$symbol$context( \($namespace\))]($style) '
-
-[aws]
-style = "bold blue"
-format = '[$symbol($profile )(\[$duration\] )]($style)'
 
 [line_break]
 disabled = false
 
 [directory]
-style               = "bold blue"
 truncation_length   = 0
 truncate_to_repo    = false
 use_logical_path    = false
@@ -66,5 +65,5 @@ symbol = "& "
 number_threshold = 1
 
 [character]
-success_symbol = '\$'
-error_symbol = '\$'
+success_symbol = '[\$](bold green)'
+error_symbol = '[\$](bold red)'

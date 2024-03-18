@@ -10,6 +10,7 @@ set showmatch               " show matching brackets
 set nofoldenable            " disable folding
 set ttimeoutlen=50          " delay in milliseconds after (Esc) key press
 "colors paramount            " stored in .vim/colors
+colors delek
 
 " space settings: spaces instead of tabs, looks the same in all editors
 set expandtab       " insert space(s) when tab key is pressed
@@ -48,7 +49,7 @@ set cinkeys-=0#
 set indentkeys-=0#
 
 " show only cursor column (in bytes), right aligned
-set rulerformat=%=%c
+"set rulerformat=%=%c
 
 " toggle paste to retain indentation of the pasted text
 set pastetoggle=<F2>
@@ -74,14 +75,14 @@ endif
 endfunction
 
 " reset the cursor on start (for older versions of vim, usually not required)
-augroup myCmds
-au!
-autocmd VimEnter * silent !echo -ne "\e[2 q"
-augroup END
+"augroup myCmds
+"au!
+"autocmd VimEnter * silent !echo -ne "\e[2 q"
+"augroup END
 
 " change the cursor between normal and insert mode
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
+"let &t_SI = "\e[6 q"
+"let &t_EI = "\e[2 q"
 
 " vim-go plugin
 let g:go_auto_type_info = 1 " show info on identifiers (:GoInfo)

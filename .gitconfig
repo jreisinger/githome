@@ -20,12 +20,12 @@
 
     # If delta (github.com/dandavison/delta) is installed use it for pager.
     # Otherwise use less.
-    pager = "p=$(which delta); ${p:-less}"
+    #pager = "p=$(which delta); ${p:-less}"
 
     hooksPath = ~/.git-global-hooks
 [delta]
     navigate = true # use n and N to move between diff sections
-    light = false # set to true if you're in a terminal w/ a light background color
+    light = true # set to true if you're in a terminal w/ a light background color
     file-style = normal # filename color
 [merge]
     tool = vimdiff

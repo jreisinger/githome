@@ -56,10 +56,11 @@ function _prependToPATH {
 _prependToPATH "/usr/local/go/bin"
 _prependToPATH "$HOME/bin"
 _prependToPATH "$HOME/go/bin"
-_prependToPATH "$HOME/Google Drive/My Drive/bin" # emp
+_prependToPATH "$HOME/Google Drive/My Drive/bin"    # emp
 _prependToPATH "$HOME/.krew/bin"
-_prependToPATH "$HOME/Library/Python/3.11/bin" # pip3 installed (Mac)
-_prependToPATH "$HOME/.rd/bin" # rancher desktop
+_prependToPATH "$HOME/Library/Python/3.11/bin"      # pip3 installed (Mac)
+_prependToPATH "$HOME/.rd/bin"                      # rancher desktop
+_prependToPATH "$HOME/.local/bin"                   # fabric
 # Use GNU instead of BSD tools (Mac; brew install coreutils). Must be first.
 _prependToPATH "/opt/homebrew/opt/coreutils/libexec/gnubin"
 
@@ -149,7 +150,6 @@ function docs-find {
     local pattern=$1
     find                                \
         ~/github.com/jreisinger/docs    \
-        ~/docs                          \
         -not -path '*.git*'             \
         -iname "*$pattern*"             \
         | rg -i "$pattern"
@@ -160,7 +160,6 @@ function docs-grep {
     local pattern=$1
     find                                \
         ~/github.com/jreisinger/docs    \
-        ~/docs                          \
         -not -path '*.git*'             \
         -type f -print0                 \
         | xargs -0 rg -i "$pattern"
@@ -189,3 +188,4 @@ fi
 
 # Fancy PS1 prompt.
 eval "$(starship init bash)"
+if [ -f "/home/jozef/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/jozef/.config/fabric/fabric-bootstrap.inc"; fi
