@@ -1,0 +1,12 @@
+#!/bin/bash
+# Detect secrets in a git repo using https://github.com/zricethezav/gitleaks
+
+if [[ $SKIP == "gitleaks" ]]; then
+    echo "skipping gitleaks checks ..."
+    exit 0
+fi
+
+set -xe
+
+# Check uncommitted changes (parsing output of 'git diff') that had been 'git add'ed.
+gitleaks protect --no-banner --staged
