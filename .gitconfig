@@ -20,7 +20,7 @@
 
     # If delta (github.com/dandavison/delta) is installed use it for pager.
     # Otherwise use less.
-    #pager = "p=$(which delta); ${p:-less}"
+    pager = "p=$(which delta); ${p:-less}"
 
     hooksPath = ~/.git-global-hooks
 [delta]
