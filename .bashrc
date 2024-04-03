@@ -117,7 +117,7 @@ if which kubectl > /dev/null 2>&1; then
     alias k=kubectl
     complete -F __start_kubectl k # enable completion for k alias
 
-    alias bb='kubectl run busybox-$(whoami) --image=busybox --rm -it --restart=Never --command -- '
+    alias bb='kubectl run busybox --image=busybox --rm -it --restart=Never --command -- '
 fi
 
 if which kubectx > /dev/null 2>&1; then
@@ -140,7 +140,7 @@ function h {
     local cmd
     # perl removes numbers and whitespace from the beginning of line
     # awk removes duplicate lines (even not adjacent) and keeps the original order
-     cmd=$(history | $tac | perl -wpe 's/^\s*\d+\s+//' | awk '!seen[$0]++' | fzf --scheme=history)
+    cmd=$(history | $tac | perl -wpe 's/^\s*\d+\s+//' | awk '!seen[$0]++' | fzf --scheme=history)
     # add $cmd to history
     history -s "$cmd"
 }
@@ -163,6 +163,11 @@ function docs-grep {
         -not -path '*.git*'             \
         -type f -print0                 \
         | xargs -0 rg -i "$pattern"
+}
+
+function ap {
+    AWS_PROFILE=$(aws configure list-profiles | fzf)
+    export AWS_PROFILE
 }
 
 #########
