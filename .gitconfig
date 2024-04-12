@@ -5,8 +5,8 @@
 #    signingkey = A12EAD1BAA8578E1
 [include]
     path = ~/.gitconfig-personal
-[includeIf "gitdir:~/github.com/empatica/"]
-    path = ~/.gitconfig-empatica
+[includeIf "gitdir:~/visualstudio.com/"]
+    path = ~/.gitconfig-tfs
 
 [commit]
     gpgSign = true
@@ -25,7 +25,7 @@
     hooksPath = ~/.git-global-hooks
 [delta]
     navigate = true # use n and N to move between diff sections
-    light = true # set to true if you're in a terminal w/ a light background color
+    light = false # set to true if you're in a terminal w/ a light background color
     file-style = normal # filename color
 [merge]
     tool = vimdiff
