@@ -165,9 +165,17 @@ function docs-grep {
         | xargs -0 rg -i "$pattern"
 }
 
+# Select from multiple AWS profiles.
 function ap {
     AWS_PROFILE=$(aws configure list-profiles | fzf)
     export AWS_PROFILE
+}
+
+# Select from multiple k8s cluster configurations.
+function kc {
+    local k8s_config
+    k8s_config=$(find "$HOME"/.kube -type f -not -path "$HOME/.kube/old/*" \( -iname '*.yaml' -o -iname '*.yml' -o -iname '*.conf' -o -iname '*.kube' -o -iname 'config' \) | fzf)
+    export KUBECONFIG="$k8s_config"
 }
 
 #########
@@ -187,10 +195,18 @@ export MAIL="/var/mail/$USER"
 
 # print one of my favorite quotes when bash is interactive and it's morning
 if  [[ $- == *i* ]] && [[ "$(TZ=CET date +%k)" -lt 10 ]]; then
-    myquote
+    # myquote
+    curl https://raw.githubusercontent.com/jreisinger/quotes/master/quotes.txt --silent | grep -v '^$' | shuf -n 1
     #goal
 fi
 
 # Fancy PS1 prompt.
 eval "$(starship init bash)"
-if [ -f "/home/jozef/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/jozef/.config/fabric/fabric-bootstrap.inc"; fi
+if [ -f "$HOME/.config/fabric/fabric-bootstrap.inc" ]; then
+    . "$HOME/.config/fabric/fabric-bootstrap.inc"
+fi
+
+# nvm (manage node versions) stuff
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
