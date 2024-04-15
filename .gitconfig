@@ -5,7 +5,7 @@
 #    signingkey = A12EAD1BAA8578E1
 [include]
     path = ~/.gitconfig-personal
-[includeIf "gitdir:~/visualstudio.com/"]
+[includeIf "gitdir:~/tfs/"]
     path = ~/.gitconfig-tfs
 
 [commit]
