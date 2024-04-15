@@ -74,18 +74,23 @@ export PATH
 ###############
 
 # SSH hostnames completion (based on ~/.ssh/config)
-if [ -e ~/.ssh_bash_completion ]; then
+if [[ -r ~/.ssh_bash_completion ]]; then
     source ~/.ssh_bash_completion
 fi
 
-# Linux
-if [[ -r '/usr/share/bash-completion/bash_completion' ]]; then
-    source '/usr/share/bash-completion/bash_completion'
+# Git, prerequisite: curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+if [[ -r ~/.git-completion.bash ]]; then
+    source ~/.git-completion.bash
 fi
 
-# Mac (prerequisite: brew install bash-completion@2)
-if [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]]; then 
-    source "/opt/homebrew/etc/profile.d/bash_completion.sh"
+# Bash on Linux
+if [[ -r /usr/share/bash-completion/bash_completion ]]; then
+    source /usr/share/bash-completion/bash_completion
+fi
+
+# Bash on Mac, prerequisite: brew install bash-completion@2
+if [[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]]; then 
+    source /opt/homebrew/etc/profile.d/bash_completion.sh
 fi
 
 ###########
