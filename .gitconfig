@@ -1,15 +1,16 @@
-# So I can have two users. ~/.gitconfig-* looks like:
+# So I can have two configs.
+# ~/.gitconfig-* looks like:
 #[user]
 #    login = jsmith
 #    email = john.smith@gmail.com
 #    signingkey = A12EAD1BAA8578E1
+#[commit]
+#    gpgSign = true
 [include]
     path = ~/.gitconfig-personal
 [includeIf "gitdir:~/tfs/"]
     path = ~/.gitconfig-tfs
 
-[commit]
-    gpgSign = true
 [core]
     editor = vim
     filemode = false
