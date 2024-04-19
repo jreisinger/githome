@@ -58,7 +58,7 @@ use_logical_path    = false
 
 [git_branch]
 format = "[$branch(:$remote_branch)]($style) "
-truncation_length = 25
+#truncation_length = 25
 
 [jobs]
 symbol = "& "
