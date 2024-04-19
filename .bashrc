@@ -150,24 +150,14 @@ function h {
     history -s "$cmd"
 }
 
-# Search names of my documents.
-function docs-find {
-    local pattern=$1
-    find                                \
-        ~/github.com/jreisinger/docs    \
-        -not -path '*.git*'             \
-        -iname "*$pattern*"             \
-        | rg -i "$pattern"
-}
-
-# Search contents of my documents.
-function docs-grep {
-    local pattern=$1
-    find                                \
-        ~/github.com/jreisinger/docs    \
-        -not -path '*.git*'             \
-        -type f -print0                 \
-        | xargs -0 rg -i "$pattern"
+function docs {
+    local doc mdsrv_pid
+    doc="$(find ~/github.com/jreisinger/docs -type f -not -path '*.git*' | fzf)"
+    mdsrv "$doc" &
+    mdsrv_pid=$!
+    open http://localhost:8000/"$(echo -n "$doc" | sed 's/md$/html/')"
+    vi "$doc"
+    kill $mdsrv_pid
 }
 
 # Select from multiple AWS profiles.
