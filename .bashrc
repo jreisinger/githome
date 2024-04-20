@@ -156,7 +156,8 @@ function docs {
     mdsrv "$doc" &
     mdsrv_pid=$!
     open http://localhost:8000/"$(echo -n "$doc" | sed 's/md$/html/')"
-    vi "$doc"
+    cd "$(dirname "$doc")" || exit 1
+    vi "$(basename "$doc")"
     kill $mdsrv_pid
 }
 
