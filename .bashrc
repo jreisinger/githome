@@ -52,15 +52,14 @@ function _prependToPATH {
     fi
 }
 
-# LIFO order.
+# LIFO order, i.e. last to first.
 _prependToPATH "/usr/local/go/bin"
 _prependToPATH "$HOME/bin"
 _prependToPATH "$HOME/go/bin"
-_prependToPATH "$HOME/Google Drive/My Drive/bin"    # emp
-_prependToPATH "$HOME/.krew/bin"
-_prependToPATH "$HOME/Library/Python/3.11/bin"      # pip3 installed (Mac)
-_prependToPATH "$HOME/.rd/bin"                      # rancher desktop
-_prependToPATH "$HOME/.local/bin"                   # fabric
+_prependToPATH "${KREW_ROOT:-$HOME/.krew}/bin"  # package manager for kubectl plugins
+_prependToPATH "$HOME/Library/Python/3.11/bin"  # pip3 installed (Mac)
+_prependToPATH "$HOME/.rd/bin"                  # rancher desktop
+_prependToPATH "$HOME/.local/bin"               # fabric
 # Use GNU instead of BSD tools (Mac; brew install coreutils). Must be first.
 _prependToPATH "/opt/homebrew/opt/coreutils/libexec/gnubin"
 
@@ -133,22 +132,8 @@ fi
 # Productivity tools #
 ######################
 
-# Search history. Don't run command from h just store it into history.
-function h {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-
-    local cmd
-    # perl removes numbers and whitespace from the beginning of line
-    # awk removes duplicate lines (even not adjacent) and keeps the original order
-    cmd=$(history | $tac | perl -wpe 's/^\s*\d+\s+//' | awk '!seen[$0]++' | fzf --scheme=history)
-    # add $cmd to history
-    history -s "$cmd"
-}
+# Set up fzf key bindings (Ctrl-R) and fuzzy completion
+eval "$(fzf --bash)"
 
 function docs {
     local doc mdsrv_pid
@@ -206,3 +191,4 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+if [ -f "/Users/jozef.reisinger/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/jozef.reisinger/.config/fabric/fabric-bootstrap.inc"; fi
