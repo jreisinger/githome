@@ -10,7 +10,6 @@ set showmatch               " show matching brackets
 set nofoldenable            " disable folding
 set ttimeoutlen=50          " delay in milliseconds after (Esc) key press
 "colors paramount            " stored in .vim/colors
-"colors delek
 
 " space settings: spaces instead of tabs, looks the same in all editors
 set expandtab       " insert space(s) when tab key is pressed
@@ -84,6 +83,15 @@ endfunction
 "let &t_SI = "\e[6 q"
 "let &t_EI = "\e[2 q"
 
-" vim-go plugin
+" vim plugins manager: https://github.com/junegunn/vim-plug
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'fatih/vim-go'
+
+" vim-go plugin configuration
 let g:go_auto_type_info = 1 " show info on identifiers (:GoInfo)
 let g:go_auto_sameids   = 0 " automatically highlight identifiers (:GoSameIds[Clear])
