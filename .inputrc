@@ -15,3 +15,18 @@ set vi-cmd-mode-string "\1\e[2 q\2"
 
 # So Ctrl+l clears screen both in insert and command mode.
 Control-l: clear-screen
+
+# Case insensitive filename matching.
+set completion-ignore-case on
+
+# List ambiguous matches instead of ringing the bell.
+set show-all-if-ambiguous on
+
+# List unmodified matches instead of ringing the bell.
+set show-all-if-unmodified on
+
+# Use Tab to cycle forward through the matches.
+TAB:menu-complete
+
+# Use Shift+Tab to cycle backward through the matches.
+"\e[Z":menu-complete-backward
