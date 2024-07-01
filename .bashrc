@@ -135,15 +135,18 @@ fi
 # Set up fzf key bindings (Ctrl-R) and fuzzy completion
 eval "$(fzf --bash)"
 
-function docs {
-    local doc mdsrv_pid
-    doc="$(find ~/github.com/jreisinger/docs -type f -not -path '*.git*' | fzf)"
-    mdsrv "$doc" &
-    mdsrv_pid=$!
-    open http://localhost:8000/"$(echo -n "$doc" | sed 's/md$/html/')"
-    cd "$(dirname "$doc")" || exit 1
-    vi "$(basename "$doc")"
-    kill $mdsrv_pid
+# Search names of my documents.
+function docs-find {
+    find ~/github.com/jreisinger/docs -type f -not -path '*.git*' | fzf
+}
+
+# Search contents of my documents.
+function docs-grep {
+    local pattern=$1
+    find                                \
+        ~/github.com/jreisinger/docs    \
+        -type f -print0                 \
+        | xargs -0 rg -i "$pattern"
 }
 
 # Select from multiple AWS profiles.
@@ -168,11 +171,6 @@ export LC_ALL=en_US.UTF-8
 
 # to get "new mail" notification in terminal
 export MAIL="/var/mail/$USER"
-
-# print one of my favorite quotes when bash is interactive and only 1 out of 10 times
-# if [[ $- == *i* ]] && [[ "$RANDOM" -lt 3277 ]]; then
-# 	myquote
-# fi
 
 # print one of my favorite quotes when bash is interactive and it's morning
 if  [[ $- == *i* ]] && [[ "$(TZ=CET date +%k)" -lt 10 ]]; then
