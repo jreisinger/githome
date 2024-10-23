@@ -60,6 +60,13 @@ _prependToPATH "${KREW_ROOT:-$HOME/.krew}/bin"  # package manager for kubectl pl
 _prependToPATH "$HOME/Library/Python/3.11/bin"  # pip3 installed (Mac)
 _prependToPATH "$HOME/.rd/bin"                  # rancher desktop
 _prependToPATH "$HOME/.local/bin"               # fabric
+_prependToPATH "$HOME/.rd/bin"                  # rancher
+_prependToPATH "$HOME/.pyenv/bin:$PATH"         # pyenv
+
+# Needed for pyenv.
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
 # Use GNU instead of BSD tools (Mac; brew install coreutils). Must be first.
 _prependToPATH "/opt/homebrew/opt/coreutils/libexec/gnubin"
 
@@ -113,8 +120,6 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias vi='vim'
-
-alias k9s='k9s --readonly'
 
 if which kubectl > /dev/null 2>&1; then
     source <(kubectl completion bash)
