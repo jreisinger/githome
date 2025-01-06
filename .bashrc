@@ -61,11 +61,14 @@ _prependToPATH "$HOME/Library/Python/3.11/bin"  # pip3 installed (Mac)
 _prependToPATH "$HOME/.rd/bin"                  # rancher desktop
 _prependToPATH "$HOME/.local/bin"               # fabric
 _prependToPATH "$HOME/.rd/bin"                  # rancher
-_prependToPATH "$HOME/.pyenv/bin:$PATH"         # pyenv
+_prependToPATH "$HOME/.pyenv/bin"               # pyenv
+_prependToPATH "/Library/Frameworks/Python.framework/Versions/3.13/bin" # Python 3.13 (Mac)
 
 # Needed for pyenv.
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+if which pyenv > /dev/null 2>&1; then
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+fi
 
 # Use GNU instead of BSD tools (Mac; brew install coreutils). Must be first.
 _prependToPATH "/opt/homebrew/opt/coreutils/libexec/gnubin"
@@ -95,7 +98,7 @@ if [[ -r /usr/share/bash-completion/bash_completion ]]; then
 fi
 
 # Bash on Mac, prerequisite: brew install bash-completion@2
-if [[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]]; then 
+if [[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]]; then
     source /opt/homebrew/etc/profile.d/bash_completion.sh
 fi
 
