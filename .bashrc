@@ -140,21 +140,26 @@ fi
 # Productivity tools #
 ######################
 
-# Set up fzf key bindings (Ctrl-R) and fuzzy completion
+# Set up fzf key bindings and fuzzy completion
+# (Ctrl-R - history, Ctrl-T - files in ~, Alt-C - change dir)
+export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,OneDrive"
 eval "$(fzf --bash)"
 
 # Search names of my documents.
 function docs-find {
-    find ~/github.com/jreisinger/docs -type f -not -path '*.git*' | fzf
+    find    ~/github.com/jreisinger/docs    \
+            ~/github.com/jreisinger/pocs    \
+            ~/github.com/go-monk            \
+            -type f -not -path '*.git*' | fzf
 }
 
 # Search contents of my documents.
 function docs-grep {
     local pattern=$1
-    find                                \
-        ~/github.com/jreisinger/docs    \
-        -type f -print0                 \
-        | xargs -0 rg -i "$pattern"
+    find    ~/github.com/jreisinger/docs    \
+            ~/github.com/jreisinger/pocs    \
+            ~/github.com/go-monk            \
+            -type f -print0 | xargs -0 rg -i "$pattern"
 }
 
 # Select from multiple AWS profiles.
@@ -182,8 +187,10 @@ export MAIL="/var/mail/$USER"
 
 # print one of my favorite quotes when bash is interactive and it's morning
 if  [[ $- == *i* ]] && [[ "$(TZ=CET date +%k)" -lt 10 ]]; then
-    # myquote
-    curl https://raw.githubusercontent.com/jreisinger/quotes/master/quotes.txt --silent | grep -v '^$' | shuf -n 1
+    #myquote
+    #curl https://raw.githubusercontent.com/jreisinger/quotes/master/quotes.txt --silent | grep -v '^$' | shuf -n 1
+    go install github.com/jreisinger/quotes@latest
+    quotes -r
     #goal
 fi
 

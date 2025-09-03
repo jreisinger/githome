@@ -49,8 +49,9 @@ disabled = false
 
 [directory]
 style = 'bright-blue'
-truncation_length   = 0
+truncation_length   = 3
 truncate_to_repo    = false
+truncation_symbol   = '…/'
 use_logical_path    = false
 [directory.substitutions]
 #"/private/play"     = "~/play"
@@ -65,5 +66,5 @@ symbol = "& "
 number_threshold = 1
 
 [character]
-#success_symbol = '[\$](bold green)'
-error_symbol = '[✗](bold red)'
+success_symbol = '[\$]($style)'
+error_symbol = '[\$](bold red)'

@@ -9,7 +9,7 @@ filetype plugin indent on   " enable loading indent file for filetype
 set showmatch               " show matching brackets
 set nofoldenable            " disable folding
 set ttimeoutlen=50          " delay in milliseconds after (Esc) key press
-"colors paramount            " stored in .vim/colors
+colors delek              " stored in ~/.vim/colors/
 
 " space settings: spaces instead of tabs, looks the same in all editors
 set expandtab       " insert space(s) when tab key is pressed

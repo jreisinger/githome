@@ -10,6 +10,8 @@
     path = ~/.gitconfig-personal
 [includeIf "gitdir:~/tfs/"]
     path = ~/.gitconfig-tfs
+[includeIf "gitdir:~/github.com/thermofisher/"]
+  path = ~/.gitconfig-tfs
 
 [core]
     editor = vim
