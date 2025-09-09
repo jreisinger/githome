@@ -9,6 +9,9 @@
 # MacBook #
 ###########
 
+# fix locale; must be up here
+export LANG=en_US.UTF-8
+
 if [[ $(uname -s) == "Darwin" ]]; then
     # Stop saying that zsh is the new default.
     export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -112,7 +115,7 @@ fi
 
 alias githome='git --work-tree=$HOME --git-dir=$HOME/github.com/jreisinger/githome'
 
-alias ls='ls --color=auto --group-directories-first'
+alias ls='ls --color=auto'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -178,9 +181,6 @@ function kc {
 #########
 # Other #
 #########
-
-# fix locale issue when scp-ing to a server
-export LC_ALL=en_US.UTF-8
 
 # to get "new mail" notification in terminal
 export MAIL="/var/mail/$USER"
