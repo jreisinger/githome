@@ -190,7 +190,7 @@ if  [[ $- == *i* ]] && [[ "$(TZ=CET date +%k)" -lt 10 ]]; then
     #myquote
     #curl https://raw.githubusercontent.com/jreisinger/quotes/master/quotes.txt --silent | grep -v '^$' | shuf -n 1
     go install github.com/jreisinger/quotes@latest
-    quotes -r
+    quotes -p -r
     #goal
 fi
 
