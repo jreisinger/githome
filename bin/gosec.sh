@@ -13,7 +13,7 @@ set -u # exit on unset variable
 echo '--> Keep your Go version up to date'
 UPSTREAM=$(curl -s https://go.dev/VERSION?m=text | head -1)
 INSTALLED=$(go version | cut -d ' ' -f 3)
-GOMOD=$(grep '^go ' go.mod | awk '{print $2}')
+GOMOD=$(grep '^go ' go.mod | sed 's/ //')
 printf "Upstream\t%s\n" "$UPSTREAM"
 printf "Installed\t%s\n" "$INSTALLED"
 printf "In go.mod\t%s\n" "$GOMOD"
