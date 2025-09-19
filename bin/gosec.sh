@@ -35,3 +35,11 @@ go vet ./...
 echo '--> Inspect source code for security problems (gosec)'
 go install github.com/securego/gosec/v2/cmd/gosec@latest
 gosec -quiet -confidence=high -severity=high ./...
+
+######################################################################
+# https://stackoverflow.com/questions/67201708/go-update-all-modules #
+######################################################################
+
+echo '--> TIP: To update all dependencies to latest version run:'
+echo 'go get -u ./...'
+echo 'go mod tidy'
