@@ -90,7 +90,7 @@ call plug#begin()
 "   - Vim (Windows): '~/vimfiles/plugged'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " vim-go plugin configuration
 let g:go_auto_type_info = 1 " show info on identifiers (:GoInfo)
