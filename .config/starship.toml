@@ -31,7 +31,8 @@ format = '[$ssh_symbol$hostname]($style) '
 
 [aws]
 disabled = false
-style = "fg:202"
+symbol = '☁️ '
+#style = "fg:221"
 format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
 
 [gcloud]
