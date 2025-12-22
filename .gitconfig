@@ -11,7 +11,9 @@
 [includeIf "gitdir:~/tfs/"]
     path = ~/.gitconfig-tfs
 [includeIf "gitdir:~/github.com/thermofisher/"]
-  path = ~/.gitconfig-tfs
+    path = ~/.gitconfig-tfs
+[includeIf "gitdir:~/github.com/jozef-reisinger/"]
+    path = ~/.gitconfig-tfs
 
 [core]
     editor = vim
@@ -25,7 +27,9 @@
     # Otherwise use less.
     pager = "p=$(which delta); ${p:-less}"
 
-    hooksPath = ~/.git-global-hooks
+    # Hooks in this folder apply to all repositories 
+    # without requiring any per-repository setup.
+    hooksPath = ~/.git-hooks
 [delta]
     navigate = true # use n and N to move between diff sections
     light = false # set to true if you're in a terminal w/ a light background color

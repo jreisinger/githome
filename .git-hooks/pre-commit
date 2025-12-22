@@ -1,0 +1,13 @@
+#!/bin/bash
+# Detect leaked secrets that are about to be committed.
+
+if [ "$SKIPLEAKS" == true ]; then
+  echo WARNING: skipping leaked secrets detection ...
+  exit 0
+fi
+
+set -xe
+
+gitleaks protect --no-banner --staged --verbose
+
+trufflehog git file://. --since-commit HEAD --results=verified,unknown --fail
