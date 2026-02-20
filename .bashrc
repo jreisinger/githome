@@ -59,16 +59,17 @@ function _prependToPATH {
 _prependToPATH "/usr/local/go/bin"
 _prependToPATH "$HOME/bin"
 _prependToPATH "$HOME/go/bin"
-_prependToPATH "${KREW_ROOT:-$HOME/.krew}/bin"  # package manager for kubectl plugins
-_prependToPATH "$HOME/Library/Python/3.11/bin"  # pip3 installed (Mac)
-_prependToPATH "$HOME/.rd/bin"                  # rancher desktop
-_prependToPATH "$HOME/.local/bin"               # fabric
-_prependToPATH "$HOME/.rd/bin"                  # rancher
-_prependToPATH "$HOME/.pyenv/bin"               # pyenv
+_prependToPATH "${KREW_ROOT:-$HOME/.krew}/bin"                          # package manager for kubectl plugins
+_prependToPATH "$HOME/Library/Python/3.11/bin"                          # pip3 installed (Mac)
+_prependToPATH "$HOME/.rd/bin"                                          # rancher desktop
+_prependToPATH "$HOME/.local/bin"                                       # fabric
+_prependToPATH "$HOME/.rd/bin"                                          # rancher
+_prependToPATH "$HOME/.pyenv/bin"                                       # pyenv
 _prependToPATH "/Library/Frameworks/Python.framework/Versions/3.13/bin" # Python 3.13 (Mac)
+_prependToPATH "$HOME/.corepack/bin:$PATH"                              # javascript/typescript for CDK
 
 # Needed for pyenv.
-if which pyenv > /dev/null 2>&1; then
+if which pyenv >/dev/null 2>&1; then
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
 fi
@@ -127,7 +128,7 @@ alias mv='mv -i'
 
 alias vi='vim'
 
-if which kubectl > /dev/null 2>&1; then
+if which kubectl >/dev/null 2>&1; then
     source <(kubectl completion bash)
     alias k=kubectl
     complete -F __start_kubectl k # enable completion for k alias
@@ -135,7 +136,7 @@ if which kubectl > /dev/null 2>&1; then
     alias bb='kubectl run busybox --image=busybox --rm -it --restart=Never --command -- '
 fi
 
-if which kubectx > /dev/null 2>&1; then
+if which kubectx >/dev/null 2>&1; then
     alias kx=kubectx
 fi
 
@@ -150,19 +151,25 @@ eval "$(fzf --bash)"
 
 # Search names of my documents.
 function docs-find {
-    find    ~/github.com/jreisinger/docs    \
-            ~/github.com/jreisinger/pocs    \
-            ~/github.com/go-monk            \
-            -type f -not -path '*.git*' | fzf
+    find \
+        ~/tmp \
+        ~/data \
+        ~/github.com/jreisinger \
+        ~/github.com/go-monk \
+        ~/github.com/gokatas \
+        -type f -not -path '*.git*' | fzf
 }
 
 # Search contents of my documents.
 function docs-grep {
     local pattern=$1
-    find    ~/github.com/jreisinger/docs    \
-            ~/github.com/jreisinger/pocs    \
-            ~/github.com/go-monk            \
-            -type f -print0 | xargs -0 rg -i "$pattern"
+    find \
+        ~/tmp \
+        ~/data \
+        ~/github.com/jreisinger \
+        ~/github.com/go-monk \
+        ~/github.com/gokatas \
+        -type f -print0 | xargs -0 rg -i "$pattern"
 }
 
 # Select from multiple AWS profiles.
@@ -186,7 +193,7 @@ function kc {
 export MAIL="/var/mail/$USER"
 
 # print one of my favorite quotes when bash is interactive and it's morning
-if  [[ $- == *i* ]] && [[ "$(TZ=CET date +%k)" -lt 10 ]]; then
+if [[ $- == *i* ]] && [[ "$(TZ=CET date +%k)" -lt 10 ]]; then
     #myquote
     #curl https://raw.githubusercontent.com/jreisinger/quotes/master/quotes.txt --silent | grep -v '^$' | shuf -n 1
     go install github.com/jreisinger/quotes@latest
@@ -202,6 +209,14 @@ fi
 
 # nvm (manage node versions) stuff
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 if [ -f "/Users/jozef.reisinger/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/jozef.reisinger/.config/fabric/fabric-bootstrap.inc"; fi
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# PAI alias
+alias pai='bun ~/.claude/skills/PAI/Tools/pai.ts'
