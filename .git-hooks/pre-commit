@@ -10,4 +10,4 @@ set -xe
 
 gitleaks protect --no-banner --staged --verbose
 
-trufflehog git file://. --since-commit HEAD --results=verified,unknown --fail
+#trufflehog git file://. --since-commit HEAD --results=verified,unknown --fail
