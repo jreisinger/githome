@@ -52,3 +52,5 @@
     HEAD = cyan
     branch = green
     tag = blue bold
+[gpg]
+    program = gpg
