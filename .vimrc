@@ -74,14 +74,14 @@ endif
 endfunction
 
 " reset the cursor on start (for older versions of vim, usually not required)
-"augroup myCmds
-"au!
-"autocmd VimEnter * silent !echo -ne "\e[2 q"
-"augroup END
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
 
 " change the cursor between normal and insert mode
-"let &t_SI = "\e[6 q"
-"let &t_EI = "\e[2 q"
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
 
 " vim plugins manager: https://github.com/junegunn/vim-plug
 call plug#begin()
