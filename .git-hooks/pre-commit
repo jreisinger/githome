@@ -8,6 +8,7 @@ fi
 
 set -xe
 
-gitleaks protect --no-banner --staged --verbose
+# --redact prevents another leak path through 
+# terminal scrollback or copied  logs
+gitleaks protect --no-banner --staged --redact
 
-#trufflehog git file://. --since-commit HEAD --results=verified,unknown --fail
