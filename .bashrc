@@ -217,6 +217,3 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# PAI alias
-alias pai='bun ~/.claude/skills/PAI/Tools/pai.ts'
