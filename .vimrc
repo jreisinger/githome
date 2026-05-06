@@ -31,3 +31,6 @@ function! CodeMode()
         set nocursorline
     endif
 endfunction
+
+" Autoformat Go code on save
+autocmd BufWritePre *.go :silent! %!gofmt
