@@ -32,5 +32,12 @@ function! CodeMode()
     endif
 endfunction
 
-" Autoformat Go code on save
-autocmd BufWritePre *.go :silent! %!gofmt
+" Handle Go imports and format on save
+autocmd BufWritePre *.go call s:GoImports()
+
+" Run goimports preserving cursor and scroll position
+function! s:GoImports()
+  let l:view = winsaveview()
+  silent! %!goimports
+  call winrestview(l:view)
+endfunction
