@@ -10,5 +10,5 @@ set -xe
 
 # --redact prevents another leak path through 
 # terminal scrollback or copied  logs
-gitleaks protect --no-banner --staged --redact
+gitleaks git --no-banner --staged --redact
 
