@@ -2,6 +2,10 @@
 add_newline = false
 
 format = """
+↪ \
+$status\
+$time\
+$cmd_duration\
 $username\
 $hostname\
 $aws\
@@ -18,9 +22,15 @@ $git_state\
 $git_metrics\
 $git_status\
 $jobs\
-$time\
 $line_break\
 $character"""
+
+[status]
+disabled = false
+
+[time]
+disabled = false
+format = '[$time]($style) '
 
 [username]
 style_user = 'yellow'
@@ -64,13 +74,10 @@ format = "[$branch(:$remote_branch)]($style) "
 symbol = "& "
 number_threshold = 1
 
-[time]
-disabled = false
-format = '[$time]($style) '
-
 [line_break]
 disabled = false
 
 [character]
 success_symbol = '[\$]($style)'
-error_symbol = '[\$](bold red)'
+#error_symbol = '[\$](bold red)'
+error_symbol = '[\$]($style)'
