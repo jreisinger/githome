@@ -2,9 +2,7 @@
 add_newline = false
 
 format = """
-↪ \
 $status\
-$time\
 $cmd_duration\
 $username\
 $hostname\
@@ -27,10 +25,10 @@ $character"""
 
 [status]
 disabled = false
+format = '↪ [$symbol$status]($style) '
 
-[time]
-disabled = false
-format = '[$time]($style) '
+[cmd_duration]
+format = '↪ [$duration]($style) '
 
 [username]
 style_user = 'yellow'
